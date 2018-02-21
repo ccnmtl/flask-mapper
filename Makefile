@@ -3,6 +3,8 @@ VE ?= ./.venv
 PY_SENTINAL ?= $(VE)/sentinal
 PIPFILE ?= Pipfile
 PY_VERSION ?= 3.6
+TOPLEVEL ?= hello.py
+export FLASK_APP = $(TOPLEVEL)
 
 $(PY_SENTINAL): $(PIPFILE) $(VE) 
 	rm -rf $(VE)
@@ -12,8 +14,17 @@ $(PY_SENTINAL): $(PIPFILE) $(VE)
 $(VE):
 	pipenv --python $(PY_VERSION)
 
-shell: $(PY_SENTINAL)
+bash: $(PY_SENTINAL)
 	pipenv shell
+
+python: $(PY_SENITNAL)
+	pipenv run python
+
+shell: $(PY_SENTINAL)
+	pipenv run flask shell
+
+runserver: $(PY_SENTINAL)
+	pipenv run flask run
 
 clean:
 	rm -rf $(VE)
