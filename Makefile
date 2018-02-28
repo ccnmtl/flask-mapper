@@ -3,8 +3,8 @@ VE ?= ./.venv
 PY_SENTINAL ?= $(VE)/sentinal
 PIPFILE ?= Pipfile
 PY_VERSION ?= 3.6
-TOPLEVEL ?= hello.py
-export FLASK_APP = $(TOPLEVEL)
+TOPLEVEL ?= flask_mapper.py
+export FLASK_APP = flask_mapper/flask_mapper/$(TOPLEVEL)
 
 $(PY_SENTINAL): $(PIPFILE) $(VE) 
 	rm -rf $(VE)
@@ -25,6 +25,12 @@ shell: $(PY_SENTINAL)
 
 runserver: $(PY_SENTINAL)
 	pipenv run flask run
+
+runserver-external: $(PY_SENTINAL)
+	pipenv run flask run --host=0.0.0.0
+
+credentials:
+	pipenv run python flask_mapper/flask_mapper/sheets.py
 
 clean:
 	rm -rf $(VE)

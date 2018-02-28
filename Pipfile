@@ -8,6 +8,8 @@ name = "pypi"
 [packages]
 
 flask = "*"
+google-api-python-client = "*"
+googlemaps = "*"
 
 
 [dev-packages]
